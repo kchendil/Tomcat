@@ -20,6 +20,8 @@ Attributes
 * `node["tomcat"]["port"]` - The network port used by Tomcat's HTTP connector, default `8080`.
 * `node["tomcat"]["ssl_port"]` - The network port used by Tomcat's SSL HTTP connector, default `8443`.
 * `node["tomcat"]["ajp_port"]` - The network port used by Tomcat's AJP connector, default `8009`. 
+* `node['tomcat']['tomcat_install_loc']` - The tomcat install location, default `/tmp/apache`
+* `node['tomcat']['tomcat_version']` - The tomcat version to be installed, default `7`
 
 Usage
 =====
