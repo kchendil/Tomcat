@@ -1,14 +1,14 @@
 Description
 ===========
 
-Installs and configures Tomcat version 6 or 7, Java servlet engine and webserver.
+Installs and configures latest Apache Tomcat version 6 or 7.
 
 Requirements
 ============
 
 Platform:
 
-* SLES 11 SP2 (Oracle)
+* SLES 11 SP2
 
 The following Opscode cookbooks are dependencies:
 
@@ -32,9 +32,7 @@ License and Author
 ==================
 
 Author:: Chendil Kumar Manoharan (<mkchendil@gmail.com>)
-
-
-Copyright:: 2010-2012, Opscode, Inc
+Copyright:: 2013, Chendil Kumar
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
