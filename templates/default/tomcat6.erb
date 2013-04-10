@@ -1,10 +1,10 @@
 #!/bin/sh
 case "$1" in
 start)
-  <%= node["tomcat"]["tomcat_install_loc"] %>/tomcat6/apache-tomcat-6/bin/startup.sh
+  <%= node["tomcat_latest"]["tomcat_install_loc"] %>/tomcat6/apache-tomcat-6/bin/startup.sh
 ;;
 stop)
-  <%= node["tomcat"]["tomcat_install_loc"] %>/tomcat6/apache-tomcat-6/bin/shutdown.sh
+  <%= node["tomcat_latest"]["tomcat_install_loc"] %>/tomcat6/apache-tomcat-6/bin/shutdown.sh
 ;;
 *)
   echo "Syntax: $0 <start|stop>"

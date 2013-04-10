@@ -17,8 +17,8 @@
 # limitations under the License.
 #
 
-tomcat_version = node['tomcat']['tomcat_version']
-tomcat_install_loc=node['tomcat']['tomcat_install_loc']
+tomcat_version = node['tomcat_latest']['tomcat_version']
+tomcat_install_loc=node['tomcat_latest']['tomcat_install_loc']
 platform=node['platform']
 platform_version=node['platform_version']
 
@@ -34,7 +34,7 @@ end
 
 case tomcat_version
 when "6"
-tomcat_url = node['tomcat']['tomcat_url_6']
+tomcat_url = node['tomcat_latest']['tomcat_url_6']
 script "Download Apache Tomcat 6 " do
   interpreter "bash"
   user "root"
@@ -83,7 +83,7 @@ execute "start tomcat 6" do
 end
 
 when "7"
-tomcat_url = node['tomcat']['tomcat_url_7']
+tomcat_url = node['tomcat_latest']['tomcat_url_7']
 script "Download Apache Tomcat 7 " do
   interpreter "bash"
   user "root"
