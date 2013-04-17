@@ -21,9 +21,80 @@ tomcat_version = node['tomcat_latest']['tomcat_version']
 tomcat_install_loc=node['tomcat_latest']['tomcat_install_loc']
 platform=node['platform']
 platform_version=node['platform_version']
-
+direct_download_version=node['tomcat_latest']['direct_download_version']
 
 if platform=="suse" || platform=="centos"
+
+if direct_download_version!="na"
+
+include_recipe "java"
+
+#convert version number to a string if it isn't already
+if tomcat_version.instance_of? Fixnum
+  tomcat_version = tomcat_version.to_s
+end
+script "Download Apache Tomcat #{direct_download_version}" do
+  interpreter "bash"
+  user "root"
+  cwd "/tmp"
+  code <<-EOH
+  wget #{direct_download_version}
+  mkdir -p #{tomcat_install_loc}/tomcat
+  EOH
+end
+
+execute "Unzip Apache Tomcat binary file" do
+ user "root"
+ installation_dir = "/tmp"
+ cwd installation_dir
+ command "tar zxvf /tmp/apache-tomcat-* -C #{tomcat_install_loc}/tomcat" 
+ action :run
+end
+
+
+execute "Change the directory name to apache-tomcat" do
+ user "root" 
+ cwd #{tomcat_install_loc}/tomcat
+ command "cd #{tomcat_install_loc}/tomcat; mv apache-tomcat-* apache-tomcat"
+ action :run
+end
+
+
+template "#{tomcat_install_loc}/tomcat/apache-tomcat/conf/server.xml" do
+  source "server7.xml.erb"
+  owner "root" 
+  mode "0644"  
+end
+template "/etc/rc.d/tomcat" do
+  source "tomcat.erb"
+  owner "root" 
+  mode "0755"  
+end
+if platform=="suse" 
+
+script "Start tomcat" do
+  interpreter "bash"
+  user "root"
+  cwd "/tmp"
+  code <<-EOH  
+  sudo /etc/init.d/tomcat start
+  EOH
+end
+end
+if platform=="centos" 
+
+script "Start tomcat" do
+  interpreter "bash"
+  user "root"
+  cwd "/tmp"
+  code <<-EOH  
+  sudo /etc/rc.d/tomcat start
+  EOH
+end
+end
+end
+if direct_download_version=="na"
+
 
 include_recipe "java"
 
@@ -171,5 +242,9 @@ log "#{platform} #{platform_version} is not yet supported." do
 	#message "#{platform} #{platform_version} is not yet supported."
   level :info
 end
+end
+
+
+
 
 end
