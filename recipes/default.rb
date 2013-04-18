@@ -61,7 +61,7 @@ end
 
 
 template "#{tomcat_install_loc}/tomcat/apache-tomcat/conf/server.xml" do
-  source "server7.xml.erb"
+  source "server6.xml.erb"
   owner "root" 
   mode "0644"  
 end
