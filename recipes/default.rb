@@ -23,7 +23,7 @@ platform=node['platform']
 platform_version=node['platform_version']
 direct_download_version=node['tomcat_latest']['direct_download_version']
 
-if platform=="suse" || platform=="centos"
+if platform=="suse" || platform=="centos" || platform=="fedora"
 
 if direct_download_version!="na"
 
@@ -155,7 +155,7 @@ script "Start tomcat 6" do
   EOH
 end
 end
-if platform=="centos" 
+if platform=="centos" || platform=="fedora"
 
 script "Start tomcat 6" do
   interpreter "bash"
@@ -222,7 +222,7 @@ script "Start tomcat 7" do
   EOH
 end
 end
-if platform=="centos" 
+if platform=="centos" || platform == "fedora"
 
 script "Start tomcat 7" do
   interpreter "bash"
