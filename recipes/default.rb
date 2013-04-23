@@ -21,11 +21,11 @@ tomcat_version = node['tomcat_latest']['tomcat_version']
 tomcat_install_loc=node['tomcat_latest']['tomcat_install_loc']
 platform=node['platform']
 platform_version=node['platform_version']
-direct_download_version=node['tomcat_latest']['direct_download_version']
+direct_download_url=node['tomcat_latest']['direct_download_url']
 
 if platform=="suse" || platform=="centos" || platform=="fedora"
 
-if direct_download_version!="na"
+if direct_download_url!="na"
 
 include_recipe "java"
 
@@ -33,12 +33,12 @@ include_recipe "java"
 if tomcat_version.instance_of? Fixnum
   tomcat_version = tomcat_version.to_s
 end
-script "Download Apache Tomcat #{direct_download_version}" do
+script "Download Apache Tomcat #{direct_download_url}" do
   interpreter "bash"
   user "root"
   cwd "/tmp"
   code <<-EOH
-  wget #{direct_download_version}
+  wget #{direct_download_url}
   mkdir -p #{tomcat_install_loc}/tomcat
   EOH
 end
@@ -81,7 +81,7 @@ script "Start tomcat" do
   EOH
 end
 end
-if platform=="centos" 
+if platform=="centos" || platform=="fedora"
 
 script "Start tomcat" do
   interpreter "bash"
@@ -93,7 +93,7 @@ script "Start tomcat" do
 end
 end
 end
-if direct_download_version=="na"
+if direct_download_url=="na"
 
 
 include_recipe "java"
@@ -237,11 +237,11 @@ end
 
 end
 
-else 
-log "#{platform} #{platform_version} is not yet supported." do
-	#message "#{platform} #{platform_version} is not yet supported."
-  level :info
-end
+# else 
+# log "#{platform} #{platform_version} is not yet supported." do
+	# #message "#{platform} #{platform_version} is not yet supported."
+  # level :info
+# end
 end
 
 
