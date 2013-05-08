@@ -14,6 +14,6 @@
 
 -Can specify the user to run tomcat as and bug fix on the version specification.
 
-## v0.1.3:
+## v0.1.4:
 
--Can specify the user to run tomcat as and bug fix on the version specification.
+-Support for java_opts and Ubuntu
